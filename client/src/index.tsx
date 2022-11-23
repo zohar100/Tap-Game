@@ -14,7 +14,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ToastContainer autoClose={2000} hideProgressBar/>
+    <ToastContainer 
+    position={"bottom-center"}
+    autoClose={1000} 
+    hideProgressBar/>
     <RouterProvider router={router}/>
   </React.StrictMode>
 );
