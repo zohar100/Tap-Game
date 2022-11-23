@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <ToastContainer />
+    <ToastContainer autoClose={2000} hideProgressBar/>
     <RouterProvider router={router}/>
   </React.StrictMode>
 );
