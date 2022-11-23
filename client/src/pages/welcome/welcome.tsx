@@ -22,7 +22,7 @@ export function Welcome() {
             setIsError(true);
             return toast(welcomeContent.nameErrorMessage, { type: "error" });
         }
-        navigate("/tap-game");
+        navigate("/tap-game/123");
     }
 
     return (

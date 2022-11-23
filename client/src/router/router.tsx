@@ -4,10 +4,10 @@ import { TapGame, Welcome } from "../pages";
 export const router = createBrowserRouter([
     {
       path: "/",
-      element: <Welcome />,  
+      element: <Welcome />,
     },
     {
-      path: "/tap-game",
+      path: "/tap-game/:id",
       element: <TapGame />,
     },
-  ]);
+]);
