@@ -34,14 +34,15 @@ export function TapGame() {
             const timeToWait = 1000;
             return setIsWaitingStateWithTimeout(timeToWait);
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isWaiting])
-
     useEffect(() => {
         window.addEventListener('keydown', handleKeyboardClicked);
         return () => window.removeEventListener('keydown', handleKeyboardClicked);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [showRightIndicator, showLeftIndicator])
 
-    const handleKeyboardClicked = (e: KeyboardEvent) => {
+    function handleKeyboardClicked(e: KeyboardEvent) {
         setIsUserTapAnyKey(true);
         const { key } = e;
         const isTapA = key.toLowerCase() === "a";
@@ -50,7 +51,7 @@ export function TapGame() {
         handleUserReaction(isTapA, isTapL)
     }
 
-    const handleUserReaction = (isTapA?: boolean, isTapL?: boolean) => {
+    function handleUserReaction(isTapA?: boolean, isTapL?: boolean) {
 
         const isPassKeysPress = (isTapA !== undefined && isTapL !== undefined);
 
