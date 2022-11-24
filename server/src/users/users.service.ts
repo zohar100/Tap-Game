@@ -23,9 +23,9 @@ export class UsersService {
     return await this.userModel.find({}).sort({ successTaps: -1 });
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     const { successTaps } = updateUserDto;
 
-    return await this.userModel.updateOne({ id }, { successTaps });
+    return await this.userModel.updateOne({ _id: id }, { successTaps });
   }
 }

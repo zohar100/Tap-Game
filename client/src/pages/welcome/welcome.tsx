@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Users } from "../../apis";
 import { welcomeContent } from "./welcome.content";
 
 
@@ -22,7 +23,13 @@ export function Welcome() {
             setIsError(true);
             return toast(welcomeContent.nameErrorMessage, { type: "error" });
         }
-        navigate("/tap-game/123");
+
+        Users.createUser({ name: nameInputValue })
+        .then((res) => {
+            const { id } = res.data;
+            navigate(`/tap-game/${id}`);
+        })
+        .catch(console.error)
     }
 
     return (

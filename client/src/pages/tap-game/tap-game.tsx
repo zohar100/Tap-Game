@@ -1,7 +1,9 @@
 import { Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Users } from "../../apis";
 import { Indicator } from "../../components";
 import { generateRandomNumber } from "../../helpers";
 import { tapGameContent } from "./tap-game.content";
@@ -9,11 +11,15 @@ import { tapGameContent } from "./tap-game.content";
 
 export function TapGame() {
 
+    const { id: userId } = useParams()
+
     const [isWaiting, setIsWaiting] = useState<boolean>(true);
 
     const [isRight, setIsRight] = useState<boolean>(false);
 
     const [isUserTapAnyKey, setIsUserTapAnyKey] = useState<boolean>(true);
+
+    const [successTaps, setSuccessTaps] = useState<number>(0);
 
     const showRightIndicator = isRight && !isWaiting;
     const showLeftIndicator = !isRight && !isWaiting;
@@ -79,6 +85,10 @@ export function TapGame() {
 
         const isSuccess = (isTapA && showLeftIndicator) || (isTapL && showRightIndicator);
         if(isSuccess) {
+            Users.updateUser({ id: userId!, successTaps: successTaps + 1 })
+            .then(() => {
+                setSuccessTaps(prev => prev + 1);
+            });
             return showMessageAndRestartGame(tapGameContent.successTapMessage, "success");
         }
 
