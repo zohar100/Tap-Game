@@ -16,6 +16,12 @@ cd server
 nest start
 ```
 
+### Endpoint
+
+- GET /users - list of users sorted by the number of steps they reached.
+- POST /users - create new user
+- PATCH /users/:id - update user
+
 ## Client
 
 ```
