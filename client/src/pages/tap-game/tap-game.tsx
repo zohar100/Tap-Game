@@ -42,7 +42,7 @@ export function TapGame() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [showRightIndicator, showLeftIndicator])
 
-    function handleKeyboardClicked(e: KeyboardEvent) {
+    const handleKeyboardClicked = (e: KeyboardEvent) => {
         setIsUserTapAnyKey(true);
         const { key } = e;
         const isTapA = key.toLowerCase() === "a";
@@ -51,30 +51,35 @@ export function TapGame() {
         handleUserReaction(isTapA, isTapL)
     }
 
-    function handleUserReaction(isTapA?: boolean, isTapL?: boolean) {
+    const showMessageAndRestartGame = (message: string, type: 'success' | 'error') => {
+        toast(message, {type});
+        setIsWaiting(true);
+    }
+
+    const handleUserReaction = (isTapA?: boolean, isTapL?: boolean) => {
 
         const isPassKeysPress = (isTapA !== undefined && isTapL !== undefined);
 
         const isTooLate = !isUserTapAnyKey && !isPassKeysPress;
         if(isTooLate) {
-            return toast(tapGameContent.tooLateTapMessage, { type: "error" })
+            return showMessageAndRestartGame(tapGameContent.tooLateTapMessage, "error")
         }
 
         if(!isPassKeysPress) return;
 
         const isTapWrongKeys = (showLeftIndicator && !isTapA) || (showRightIndicator && !isTapL);
         if(isTapWrongKeys) {
-            return toast(tapGameContent.wrongKeyTapMessage, {type: "error"});
+            return showMessageAndRestartGame(tapGameContent.wrongKeyTapMessage, "error");
         }
 
-        const isTapTooSoon = (!showLeftIndicator && !showRightIndicator) && (isTapA || isTapL);
+        const isTapTooSoon = (!showLeftIndicator && !showRightIndicator) && isUserTapAnyKey;
         if(isTapTooSoon) {
-            return toast(tapGameContent.tooSoonTapMessage, {type: "error"});
+            return showMessageAndRestartGame(tapGameContent.tooSoonTapMessage, "error");
         }
 
         const isSuccess = (isTapA && showLeftIndicator) || (isTapL && showRightIndicator);
         if(isSuccess) {
-            return toast(tapGameContent.successTapMessage, {type: "success"});
+            return showMessageAndRestartGame(tapGameContent.successTapMessage, "success");
         }
 
     }

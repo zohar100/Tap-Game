@@ -46,10 +46,12 @@ export function Welcome() {
                 onChange={onNameInputChange}
                 error={isError}
                 inputRef={nameInputRef}
-                placeholder={welcomeContent.usernameInputPlaceholder}/>
+                placeholder={welcomeContent.usernameInputPlaceholder}
+                sx={{ height: "50px", "& MuiInputBase-root": { height: "100%" } }}/>
                 <Button
                 onClick={onClickStartButton}
-                variant="contained">
+                variant="contained"
+                sx={{ height: "50px" }}>
                     {welcomeContent.startButtonText}
                 </Button>
             </Box>
