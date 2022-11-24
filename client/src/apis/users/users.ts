@@ -1,6 +1,6 @@
 import axios from "axios";
 import { CreateUserDto, UpdateUserDto } from "./dto";
-import { CreateUserResponseEntity } from "./entities";
+import { CreateUserResponseEntity, UserEntity } from "./entities";
 
 
 export class Users {
@@ -18,5 +18,11 @@ export class Users {
         const respone = await axios.patch(`${this.SERVER_ENDPOINT}/users/${id}`, { successTaps });
 
         return respone
+    }
+
+    static async getUsers() {
+        const respone = await axios.get<UserEntity[]>(`${this.SERVER_ENDPOINT}/users`)
+
+        return respone;
     }
 }
